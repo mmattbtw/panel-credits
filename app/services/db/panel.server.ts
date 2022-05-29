@@ -16,6 +16,9 @@ export async function getPanelsViaStreamerId(streamerId: string) {
         where: {
             streamerId,
         },
+        include: {
+            chatter: true,
+        }
     });
 }
 

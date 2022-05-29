@@ -22,7 +22,15 @@ export default function MyApp() {
       
       { !session ?
         <Button component={Link} to="/login" prefetch='intent'>Login</Button>
-        : <Button disabled>Login</Button>
+        : 
+        <>
+          <Button 
+            component={Link} 
+            to="streamer" 
+            prefetch='intent'
+            color='grape'
+          >Go to Streamer Dashboard</Button>
+        </>
       }
     </Container>
   )

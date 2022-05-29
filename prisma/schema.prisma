@@ -58,4 +58,6 @@ model Panel {
     title String
     markdown String
     image String
+
+    accepted Boolean @default(false)
 }
