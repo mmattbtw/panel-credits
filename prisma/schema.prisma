@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["dataProxy"]
+  engineType = "dataproxy"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Streamer {
+  // Twitch ID
+    id String @id 
+    login String
+    displayName String
+    profilePicture String
+
+    panels Panel[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model ChatterPanelCredits {
+    id String @id @default(cuid())
+    streamerId String
+    chatterId String
+    chatter Chatter @relation(fields: [chatterId], references: [id])
+
+    credits Int @default(0)
+}
+
+model Chatter {
+  // Twitch ID
+    id String @id
+
+    login String
+    displayName String
+    profilePicture String
+
+    panels Panel[]
+    panelCredits ChatterPanelCredits[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model Panel {
+    id String @id @default(cuid())
+
+    chatterId String
+    chatter Chatter @relation(fields: [chatterId], references: [id])
+
+    streamerId String
+    streamer Streamer @relation(fields: [streamerId], references: [id])
+
+    title String
+    markdown String
+    image String
+}
