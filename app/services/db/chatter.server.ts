@@ -7,6 +7,10 @@ export async function getChatterViaId(id: string) {
     return await prisma.chatter.findFirst({
         where: {
             id
+        },
+        include: {
+            panelCredits: true,
+            panels: true,
         }
     })
 }
@@ -15,6 +19,10 @@ export async function getChatterViaLogin(login: string) {
     return await prisma.chatter.findFirst({
         where: {
             login
+        },
+        include: {
+            panelCredits: true,
+            panels: true,
         }
     })
 }

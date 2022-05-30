@@ -1,5 +1,6 @@
 import type { ColorScheme } from "@mantine/core";
 import { ColorSchemeProvider, Global, MantineProvider } from "@mantine/core";
+import { NotificationsProvider } from "@mantine/notifications";
 import type { MetaFunction } from "@remix-run/node";
 import {
   Links,
@@ -31,7 +32,9 @@ export default function App() {
       <body>
         
         <MantineTheme>
+          <NotificationsProvider>
             <Outlet />
+          </NotificationsProvider>
         </MantineTheme>
 
         <ScrollRestoration />

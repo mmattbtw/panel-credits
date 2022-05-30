@@ -1,7 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["dataProxy"]
-  engineType = "dataproxy"
+  engineType      = "dataproxy"
 }
 
 datasource db {
@@ -10,54 +10,58 @@ datasource db {
 }
 
 model Streamer {
-  // Twitch ID
-    id String @id 
-    login String
-    displayName String
-    profilePicture String
-
-    panels Panel[]
-
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id                  String                @id
+  login               String
+  displayName         String
+  profilePicture      String
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+  panels              Panel[]
+  ChatterPanelCredits ChatterPanelCredits[]
 }
 
 model ChatterPanelCredits {
-    id String @id @default(cuid())
-    streamerId String
-    chatterId String
-    chatter Chatter @relation(fields: [chatterId], references: [id])
+  id      String @id @default(cuid())
+  credits Int    @default(0)
 
-    credits Int @default(0)
+  chatterId String
+  chatter   Chatter @relation(fields: [chatterId], references: [id])
+
+  streamerId String
+  streamer   Streamer @relation(fields: [streamerId], references: [id])
 }
 
 model Chatter {
-  // Twitch ID
-    id String @id
+  id             String                @id
+  login          String
+  displayName    String
+  profilePicture String
+  createdAt      DateTime              @default(now())
+  updatedAt      DateTime              @updatedAt
+  panelCredits   ChatterPanelCredits[]
+  panels         Panel[]
+}
 
-    login String
-    displayName String
-    profilePicture String
-
-    panels Panel[]
-    panelCredits ChatterPanelCredits[]
-
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+enum PanelStatus {
+  ACCEPTED
+  REJECTED
+  PENDING
 }
 
 model Panel {
-    id String @id @default(cuid())
+  id         String  @id @default(cuid())
+  chatterId  String
+  streamerId String
+  title      String
+  markdown   String
+  image      String?
+  link       String?
 
-    chatterId String
-    chatter Chatter @relation(fields: [chatterId], references: [id])
+  status PanelStatus @default(PENDING)
 
-    streamerId String
-    streamer Streamer @relation(fields: [streamerId], references: [id])
+  chatter  Chatter  @relation(fields: [chatterId], references: [id])
+  streamer Streamer @relation(fields: [streamerId], references: [id])
 
-    title String
-    markdown String
-    image String
-
-    accepted Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

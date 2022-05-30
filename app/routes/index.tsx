@@ -1,4 +1,4 @@
-import { Button, Container } from '@mantine/core';
+import { Button, Container, Group } from '@mantine/core';
 import type { LoaderFunction } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import { authenticator } from '~/services/auth/auth.server';
@@ -23,14 +23,19 @@ export default function MyApp() {
       { !session ?
         <Button component={Link} to="/login" prefetch='intent'>Login</Button>
         : 
-        <>
+        <Group>
           <Button 
             component={Link} 
             to="streamer" 
             prefetch='intent'
             color='grape'
           >Go to Streamer Dashboard</Button>
-        </>
+          <Button
+            component={Link}
+            to="viewer"
+            prefetch='intent'
+          >Go to Viewer Dashboard</Button>
+        </Group>
       }
     </Container>
   )
