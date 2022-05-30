@@ -21,6 +21,18 @@ export const action: ActionFunction = async ({ request, params }) => {
     const image = formData.get("image")?.toString() || undefined;
     const link = formData.get("link")?.toString() || undefined;
 
+    if (title.length > 100 || markdown.length > 5000) {
+        return redirect("/viewer/" + streamerId);
+    } else if (image) {
+        if (image.length > 500) {
+            return redirect("/viewer/" + streamerId);
+        }
+    } else if (link) {
+        if (link.length > 500) {
+            return redirect("/viewer/" + streamerId);
+        }
+    }
+
     await createPanel({
         chatterId,
         streamerId,
