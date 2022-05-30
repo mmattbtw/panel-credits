@@ -20,7 +20,11 @@ export async function getStreamerViaLogin(login: string) {
 }
 
 export async function getAllStreamers() {
-    return await prisma.streamer.findMany();
+    return await prisma.streamer.findMany({
+        orderBy: {
+            displayName: 'desc',
+        },
+    });
 }
 
 export async function createStreamer(streamer: Pick<Streamer, 'id' | 'login' | 'displayName' | 'profilePicture'>) {
