@@ -8,7 +8,7 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration
+  ScrollRestoration,
 } from "@remix-run/react";
 import { useState } from "react";
 
@@ -16,11 +16,10 @@ export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "Panel Credits",
   viewport: "width=device-width,initial-scale=1",
-  'twitter:creator': '@mmattbtw',
-  'twitter:site': '@mmattbtw',
-  'twitter:card': 'summary',
+  "twitter:creator": "@mmattbtw",
+  "twitter:site": "@mmattbtw",
+  "twitter:card": "summary",
 });
-
 
 export default function App() {
   return (
@@ -30,7 +29,6 @@ export default function App() {
         <Links />
       </head>
       <body>
-        
         <MantineTheme>
           <NotificationsProvider>
             <Outlet />
@@ -51,8 +49,6 @@ function MantineTheme({ children }: { children: React.ReactNode }) {
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
   return (
-
-
     <ColorSchemeProvider
       colorScheme={colorScheme}
       toggleColorScheme={toggleColorScheme}
@@ -65,19 +61,25 @@ function MantineTheme({ children }: { children: React.ReactNode }) {
         <Global
           styles={(theme) => ({
             a: {
-              color: theme.colorScheme === "dark" ? theme.colors.dark[0] : theme.colors.gray[7],
-              textDecoration: 'underline',
-          
-              '&:hover': {
+              color:
+                theme.colorScheme === "dark"
+                  ? theme.colors.dark[0]
+                  : theme.colors.gray[7],
+              textDecoration: "underline",
+
+              "&:hover": {
                 backgroundColor:
-                  theme.colorScheme === 'dark'
+                  theme.colorScheme === "dark"
                     ? theme.fn.rgba(theme.colors[theme.primaryColor][9], 0.25)
                     : theme.colors[theme.primaryColor][0],
-                color: theme.colors[theme.primaryColor][theme.colorScheme === 'dark' ? 3 : 7],
+                color:
+                  theme.colors[theme.primaryColor][
+                    theme.colorScheme === "dark" ? 3 : 7
+                  ],
                 textDecoration: "none",
-                border: 'none',
-              }
-            }
+                border: "none",
+              },
+            },
           })}
         />
         {children}

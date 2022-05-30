@@ -17,28 +17,27 @@ export interface sessionType {
 }
 
 export type Panel = {
-  id: string
-  chatterId: string
-  streamerId: string
-  title: string
-  markdown: string
-  image?: string
-  link?: string
-  status: "PENDING" | "ACCEPTED" | "REJECTED"
-  createdAt: Date
-  updatedAt: Date
+  id: string;
+  chatterId: string;
+  streamerId: string;
+  title: string;
+  markdown: string;
+  image?: string;
+  link?: string;
+  status: "PENDING" | "ACCEPTED" | "REJECTED";
+  createdAt: Date;
+  updatedAt: Date;
 
-  chatter: Chatter
-}
+  chatter: Chatter;
+};
 
 export type ChatterPanelCredits = {
-  id: string
-  streamerId: string
-  credits: number
+  id: string;
+  streamerId: string;
+  credits: number;
 
-  chatterId: string
-  chatter: Chatter
+  chatterId: string;
+  chatter: Chatter;
 
-  streamer: Streamer
-}
-  
+  streamer: Streamer;
+};
