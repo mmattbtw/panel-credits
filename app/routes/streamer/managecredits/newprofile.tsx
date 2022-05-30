@@ -7,12 +7,6 @@ import { getChatterViaLogin } from "~/services/db/chatter.server";
 import { createChatterCreditsProfile, getChatterPanelCreditsViaLogin } from "~/services/db/chatterpanelcredits.server";
 import type { sessionType } from "~/typings/typings";
 
-type FormActionDataNewProfile = {
-    chatterId: string
-    streamerId: string
-    credits: number
-}
-
 export const action: ActionFunction = async ({ request }) => {
     const formData = await request.formData();
     const session: sessionType = await authenticator.isAuthenticated(request, {
@@ -30,11 +24,7 @@ export const action: ActionFunction = async ({ request }) => {
         const chatterProfile = await getChatterViaLogin(chatterLogin)
         const chatterId = chatterProfile?.id || ""
 
-        const post: FormActionDataNewProfile = {
-            chatterId, streamerId, credits
-        }
-
-        await createChatterCreditsProfile(post)
+        await createChatterCreditsProfile({chatterId, streamerId, credits})
         
         return redirect("/streamer/managecredits");
     } else {

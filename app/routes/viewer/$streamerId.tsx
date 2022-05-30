@@ -1,9 +1,10 @@
 import { Avatar, Button, Container, Group } from "@mantine/core";
-import type { LoaderFunction } from "@remix-run/node";
+import type { LoaderFunction} from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { Link, Outlet, useLoaderData } from "@remix-run/react";
 import PanelComponent from "~/components/Panel";
 import { authenticator } from "~/services/auth/auth.server";
-import { getChatterPanelCreditsViaId } from "~/services/db/chatterpanelcredits.server";
+import { createChatterCreditsProfile, getChatterPanelCreditsViaId } from "~/services/db/chatterpanelcredits.server";
 import { getPanelsViaChatterId } from "~/services/db/panel.server";
 import type { ChatterPanelCredits, Panel, sessionType } from "~/typings/typings";
 
@@ -22,7 +23,17 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
     const streamerId = params.streamerId as string;
 
-    const creditProfile = await getChatterPanelCreditsViaId(session.json.id, streamerId);
+    let creditProfile = await getChatterPanelCreditsViaId(session.json.id, streamerId);
+    if (!creditProfile) {
+        // @ts-ignore (its literally the exact same type but typescript be like 🤓)
+        creditProfile = await createChatterCreditsProfile({
+            chatterId: session.json.id,
+            streamerId:     streamerId,
+            credits: 0,
+        });
+        return redirect("/viewer/" + streamerId);
+    }
+
     const panels = await getPanelsViaChatterId(session.json.id, streamerId);
 
     return { session, creditProfile, panels } as loaderData
@@ -66,7 +77,7 @@ export default function StreamerPage() {
             {
                 panels.length >= 1 ?
                     panels.map(panel => (
-                        <PanelComponent key={panel.id} {...panel} />
+                            <PanelComponent key={panel.id} {...panel} />
                     ))
                 : <p>You have not submitted any panels yet!</p>
             }
