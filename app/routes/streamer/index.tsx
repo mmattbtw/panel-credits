@@ -2,6 +2,7 @@ import { Button, Container, Group } from "@mantine/core";
 import type { LoaderFunction } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { authenticator } from "~/services/auth/auth.server";
+import { createStreamer, getStreamerViaId } from "~/services/db/streamer.server";
 import type { sessionType } from "~/typings/typings";
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -9,6 +10,15 @@ export const loader: LoaderFunction = async ({ request }) => {
         failureRedirect: "/login",
     });
     
+    let streamerProfile = await getStreamerViaId(session.json.id);
+    if (!streamerProfile) {
+        streamerProfile = await createStreamer({
+            id: session.json.id,
+            displayName: session.json.display_name,
+            login: session.json.login,
+            profilePicture: session.json.profile_image_url,
+        });
+    };
     if (!session) return null;
     
     return session as sessionType;

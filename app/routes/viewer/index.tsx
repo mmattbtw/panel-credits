@@ -23,13 +23,6 @@ export const loader: LoaderFunction = async ({ request }) => {
     const streamers = await getAllStreamers();
     let streamersAvailable: Streamer[] = [];
 
-    // for (const streamer in streamers) {
-    //     if (await creditProfileExists(session.json.id, streamer)) {
-    //         console.log(streamer)
-    //         streamersAvailable.push(streamers[streamer]); 
-    //     }
-    // }
-
     await Promise.all(streamers.map(async (streamer) => {
         if (await creditProfileNotExists(session.json.id, streamer.id)) {
             streamersAvailable.push(streamer);
@@ -90,7 +83,6 @@ export default function ViewerPage() {
                             <Link
                                 to={`/viewer/${streamer.id}`}
                                 prefetch="intent"
-                                key={streamer.id}
                             >
                                 <Group mt='md'>
                                     <Avatar src={streamer.profilePicture} alt={streamer.displayName + "'s profile image."} size='lg' radius="xl" />
