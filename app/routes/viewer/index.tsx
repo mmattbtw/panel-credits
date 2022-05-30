@@ -57,7 +57,7 @@ export default function ViewerPage() {
             {chatterAccounts.length >= 1 ? (
                 chatterAccounts.map((chatterAccount) => (
                     <Link to={`/viewer/${chatterAccount.streamerId}`} prefetch="intent" key={chatterAccount.id}>
-                        <Group mt="md">
+                        <Group mt="md" mb="md">
                             <Avatar
                                 src={chatterAccount.streamer.profilePicture}
                                 alt={chatterAccount.streamer.displayName + "'s profile image."}
@@ -81,7 +81,7 @@ export default function ViewerPage() {
                     {streamersAvailable.map((streamer) => (
                         <div key={streamer.id}>
                             <Link to={`/viewer/${streamer.id}`} prefetch="intent">
-                                <Group mt="md">
+                                <Group mt="md" mb="md">
                                     <Avatar src={streamer.profilePicture} alt={streamer.displayName + "'s profile image."} size="lg" radius="xl" />
                                     <div>
                                         <Text size="lg">{streamer.displayName}</Text>
