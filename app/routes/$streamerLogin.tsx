@@ -49,6 +49,7 @@ export default function StreamerPanelsPage() {
                 >
                     {streamerLogin} information couldn't be fonud.
                 </h1>
+                <p>or no panels for {streamerLogin} could be found, who knows!</p>
             </Container>
         );
     }
