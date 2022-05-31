@@ -5,24 +5,51 @@ import PanelComponent from '~/components/Panel';
 import { getAcceptedPanelsViaStreamerLogin } from '~/services/db/panel.server';
 import type { Panel } from '~/typings/typings';
 
+export type loaderType = {
+    panels: Panel[];
+    streamerLogin: string;
+};
+
 export const loader: LoaderFunction = async ({ params }) => {
     const streamerLogin = params.streamerLogin ?? '';
+    const panels = await getAcceptedPanelsViaStreamerLogin(streamerLogin);
 
-    return (await getAcceptedPanelsViaStreamerLogin(streamerLogin)) as Panel[];
+    return { panels, streamerLogin } as loaderType;
 };
 
 export default function StreamerPanelsPage() {
-    const panels = useLoaderData() as Panel[];
+    const { panels, streamerLogin } = useLoaderData() as loaderType;
 
-    return (
-        <Container>
-            <Group>
-                {/*                vvv TROLOLOLOLOLOL */}
-                <Avatar src={panels[0].streamer.profilePicture} alt={panels[0].streamer.displayName + "'s profile image."} size="lg" radius="xl" />
-                <h1>{panels[0].streamer.displayName}'s Panels</h1>
-            </Group>
+    if (panels.length >= 1) {
+        return (
+            <Container>
+                <Group>
+                    {/*                vvv TROLOLOLOLOLOL */}
+                    <Avatar
+                        src={panels[0].streamer.profilePicture}
+                        alt={panels[0].streamer.displayName + "'s profile image."}
+                        size="lg"
+                        radius="xl"
+                    />
+                    <h1>{panels[0].streamer.displayName}'s Panels</h1>
+                </Group>
 
-            {panels.length >= 1 ? panels.map((panel) => <PanelComponent key={panel.id} {...panel} />) : <p>No panels available.</p>}
-        </Container>
-    );
+                {panels.map((panel) => (
+                    <PanelComponent key={panel.id} {...panel} />
+                ))}
+            </Container>
+        );
+    } else {
+        return (
+            <Container>
+                <h1
+                    style={{
+                        textAlign: 'center',
+                    }}
+                >
+                    {streamerLogin} information couldn't be fonud.
+                </h1>
+            </Container>
+        );
+    }
 }
