@@ -224,7 +224,7 @@ export class OAuth2Strategy<
 
         let json = await response.json();
 
-        let user = getChatterViaId(json.data[0].id);
+        let user = await getChatterViaId(json.data[0].id);
 
         if (!user) {
             await createChatter({
