@@ -42,6 +42,9 @@ export default function StreamerPage() {
                 <Button component={Link} to="managecredits" prefetch="intent">
                     Manage Credits
                 </Button>
+                <Button component={Link} to="approvalqueue" prefetch="intent">
+                    Approval Queue
+                </Button>
             </Group>
         </Container>
     );

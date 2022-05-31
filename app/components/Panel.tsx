@@ -27,8 +27,6 @@ export default function PanelComponent(panel: Panel) {
                             <Image
                                 src={panel.image}
                                 alt={panel.title}
-                                width={320}
-                                height={'auto'}
                                 onClick={() => {
                                     if (panel.image !== '') {
                                         navigator.clipboard.writeText(panel.image ?? '');

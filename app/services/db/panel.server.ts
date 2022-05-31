@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PanelStatus, PrismaClient } from '@prisma/client';
 import type { Panel } from '~/typings/typings';
 import { getChatterPanelCreditsViaId, updateChatterCreditsViaId } from './chatterpanelcredits.server';
 
@@ -53,6 +53,62 @@ export async function getPanelsViaChatterId(chatterId: string, streamerId: strin
         },
         orderBy: {
             createdAt: 'desc',
+        },
+    });
+}
+
+// long function names my beloved
+//                    vvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+export async function getPendingPanelsViaStreamerId(streamerId: string) {
+    return await prisma.panel.findMany({
+        where: {
+            streamerId,
+            status: PanelStatus.PENDING,
+        },
+        include: {
+            streamer: true,
+            chatter: true,
+        },
+        orderBy: {
+            createdAt: 'desc',
+        },
+    });
+}
+
+export async function getPendingPanelsViaChatterId(chatterId: string) {
+    return await prisma.panel.findMany({
+        where: {
+            chatterId,
+            status: PanelStatus.PENDING,
+        },
+        include: {
+            streamer: true,
+            chatter: true,
+        },
+        orderBy: {
+            createdAt: 'desc',
+        },
+    });
+}
+
+export async function rejectPanel(panelId: string) {
+    return await prisma.panel.update({
+        where: {
+            id: panelId,
+        },
+        data: {
+            status: PanelStatus.REJECTED,
+        },
+    });
+}
+
+export async function acceptPanel(panelId: string) {
+    return await prisma.panel.update({
+        where: {
+            id: panelId,
+        },
+        data: {
+            status: PanelStatus.ACCEPTED,
         },
     });
 }
