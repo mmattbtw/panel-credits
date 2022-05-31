@@ -69,7 +69,7 @@ export default function SubmitPanel() {
                 <Textarea id="markdown" rows={20} name="markdown" autosize />
             </p>
             <p>
-                <Button type="submit">Create Post</Button>
+                <Button type="submit">Submit Panel</Button>
             </p>
         </Form>
     );
