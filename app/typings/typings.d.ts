@@ -29,6 +29,7 @@ export type Panel = {
     updatedAt: Date;
 
     chatter: Chatter;
+    streamer: Streamer;
 };
 
 export type ChatterPanelCredits = {

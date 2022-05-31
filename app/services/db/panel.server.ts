@@ -75,6 +75,24 @@ export async function getPendingPanelsViaStreamerId(streamerId: string) {
     });
 }
 
+export async function getAcceptedPanelsViaStreamerLogin(streamerLogin: string) {
+    return await prisma.panel.findMany({
+        where: {
+            streamer: {
+                login: streamerLogin,
+            },
+            status: PanelStatus.ACCEPTED,
+        },
+        include: {
+            streamer: true,
+            chatter: true,
+        },
+        orderBy: {
+            updatedAt: 'desc',
+        },
+    });
+}
+
 export async function getPendingPanelsViaChatterId(chatterId: string) {
     return await prisma.panel.findMany({
         where: {
