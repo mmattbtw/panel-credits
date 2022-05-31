@@ -28,7 +28,7 @@ export async function getChatterViaLogin(login: string) {
 }
 
 export async function createChatter(chatter: Pick<Chatter, 'id' | 'login' | 'displayName' | 'profilePicture'>) {
-    return prisma.chatter.create({
+    return await prisma.chatter.create({
         data: {
             ...chatter,
         },
