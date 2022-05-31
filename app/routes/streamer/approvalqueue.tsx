@@ -56,7 +56,7 @@ export default function ApprovalQueuePage() {
             {pendingPanels.length >= 1 ? (
                 pendingPanels.map((panel: Panel) => {
                     return (
-                        <div key={panel.id}>
+                        <div key={panel.id} style={{ marginBottom: '1rem' }}>
                             <PanelComponent {...panel} />
                             <Group mt="1rem" spacing="sm" position="center">
                                 <Form method="post">
