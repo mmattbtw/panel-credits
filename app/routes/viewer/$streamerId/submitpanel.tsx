@@ -1,4 +1,4 @@
-import { Button, TextInput, Textarea } from '@mantine/core';
+import { Button, TextInput, Textarea, Tooltip } from '@mantine/core';
 import type { ActionFunction } from '@remix-run/node';
 import { redirect } from '@remix-run/node';
 import { Form } from '@remix-run/react';
@@ -53,11 +53,13 @@ export default function SubmitPanel() {
                     Title: <TextInput type="text" name="title" />
                 </label>
             </p>
-            <p>
-                <label>
-                    Image Link (optional): <TextInput type="text" name="image" />
-                </label>
-            </p>
+            <Tooltip label="The only image links that will work on the Twitch Extension are the ones that start with https://i.imgur.com/ or https://cdn.7tv.app/.">
+                <p>
+                    <label>
+                        Image Link (optional): <TextInput type="text" name="image" />
+                    </label>
+                </p>
+            </Tooltip>
             <p>
                 <label>
                     Link (optional): <TextInput type="text" name="link" />
