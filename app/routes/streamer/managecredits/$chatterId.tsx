@@ -36,7 +36,7 @@ export default function EditChatter() {
 
     return (
         <>
-            <h2>Edit Chatters with existing balances</h2>
+            <h2>Edit chatters with existing balances</h2>
             <Form method="post" reloadDocument>
                 <p>
                     <label>
