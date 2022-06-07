@@ -142,8 +142,6 @@ export async function createPanel(panel: Pick<Panel, 'chatterId' | 'streamerId' 
         let afterCredits = chatterProfile.credits - 1;
 
         const createdPanel = await prisma.panel.create({
-            // @ts-ignore shut up
-
             data: {
                 ...panel,
             },

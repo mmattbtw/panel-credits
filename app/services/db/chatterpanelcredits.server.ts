@@ -75,6 +75,10 @@ export async function createChatterCreditsProfile(profile: Pick<ChatterPanelCred
         data: {
             ...profile,
         },
+        include: {
+            chatter: true,
+            streamer: true,
+        },
     });
 }
 
