@@ -17,7 +17,7 @@ export const action: ActionFunction = async ({ request }) => {
     const credits = parseInt(formData.get('credits') as string);
 
     let user = await getChatterPanelCreditsViaLogin(chatterLogin, session.json.id);
-    console.log(user);
+
     if (!user) {
         if (!session) return null;
 

@@ -26,8 +26,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function Login() {
-    const loaderData = useLoaderData();
-    console.log(loaderData, '!');
+    useLoaderData();
 
     return (
         <Container

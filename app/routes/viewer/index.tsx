@@ -1,4 +1,4 @@
-import { Avatar, Button, Container, Group, ListStylesParams, Text } from '@mantine/core';
+import { Avatar, Button, Container, Group, Text } from '@mantine/core';
 import type { Streamer } from '@prisma/client';
 import type { LoaderFunction } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
@@ -25,7 +25,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 
     await Promise.all(
         streamers.map(async (streamer) => {
-            if (await creditProfileNotExists(session.json.id, streamer.id)) {
+            if (!(await creditProfileExists(session.json.id, streamer.id))) {
                 streamersAvailable.push(streamer);
             }
         })
@@ -34,8 +34,8 @@ export const loader: LoaderFunction = async ({ request }) => {
     return { session, chatterAccounts, streamersAvailable } as loaderData;
 };
 
-async function creditProfileNotExists(chatterId: string, streamerId: string): Promise<boolean> {
-    return (await getChatterPanelCreditsViaId(chatterId, streamerId)) ? false : true;
+async function creditProfileExists(chatterId: string, streamerId: string): Promise<boolean> {
+    return (await getChatterPanelCreditsViaId(chatterId, streamerId)) ? true : false;
 }
 
 export default function ViewerPage() {

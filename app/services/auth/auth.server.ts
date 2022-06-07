@@ -19,8 +19,7 @@ authenticator.use(
             clientID: process.env.CLIENT_ID || '',
             clientSecret: process.env.CLIENT_SECRET || '',
         },
-        async ({ accessToken, refreshToken, extraParams, profile, context }) => {
-            console.log(accessToken, refreshToken, extraParams, profile, context, 'From Twitch');
+        async ({ profile }) => {
             return await Promise.resolve({ ...profile });
         }
     )

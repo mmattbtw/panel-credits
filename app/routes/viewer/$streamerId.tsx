@@ -25,7 +25,6 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
     let creditProfile = await getChatterPanelCreditsViaId(session.json.id, streamerId);
     if (!creditProfile) {
-        // @ts-ignore (its literally the exact same type but typescript be like 🤓)
         creditProfile = await createChatterCreditsProfile({
             chatterId: session.json.id,
             streamerId: streamerId,
