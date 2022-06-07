@@ -1,34 +1,21 @@
-# Welcome to Remix!
+# Panel Credits (web)
 
--   [Remix Docs](https://remix.run/docs)
+The website for [Panel Credits](https://panelcredits.mmattDonk.com)
 
-## Deployment
+## Stack
 
-After having run the `create-remix` command and selected "Vercel" as a deployment target, you only need to [import your Git repository](https://vercel.com/new) into Vercel, and it will be deployed.
+-   [Remix](https://remix.run) (React Framework)
+-   [Mantine](https://mantine.dev) (UI Components Library)
+-   [Prisma](https://prisma.io) (Database)
+-   [Vercel](https://vercel.com) (Hosting)
+-   [TypeScript](https://www.typescriptlang.org) (Language)
 
-If you'd like to avoid using a Git repository, you can also deploy the directory by running [Vercel CLI](https://vercel.com/cli):
+## `.env` file template:
 
-```sh
-npm i -g vercel
-vercel
 ```
+CALLBACK_URL=callback URL for the Twitch API. (dev.twitch.tv) (http://localhost:3000/auth/twitch/callback)
+CLIENT_ID=client ID from the Twitch API. (dev.twitch.tv)
+CLIENT_SECRET=client secret from the Twitch API. (dev.twitch.tv)
 
-It is generally recommended to use a Git repository, because future commits will then automatically be deployed by Vercel, through its [Git Integration](https://vercel.com/docs/concepts/git).
-
-## Development
-
-To run your Remix app locally, make sure your project's local dependencies are installed:
-
-```sh
-npm install
+DATABASE_URL=URL for the Prisma database. I are using the Prisma PostgreSQL data proxy service.
 ```
-
-Afterwards, start the Remix development server like so:
-
-```sh
-npm run dev
-```
-
-Open up [http://localhost:3000](http://localhost:3000) and you should be ready to go!
-
-If you're used to using the `vercel dev` command provided by [Vercel CLI](https://vercel.com/cli) instead, you can also use that, but it's not needed.
