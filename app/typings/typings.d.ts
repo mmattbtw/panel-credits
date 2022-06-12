@@ -1,4 +1,4 @@
-import type { Chatter, Streamer } from '@prisma/client';
+import type { Chatter, Streamer } from '@prisma/client/edge';
 
 export interface sessionType {
     provider: string;

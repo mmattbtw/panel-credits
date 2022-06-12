@@ -1,4 +1,4 @@
-import { PanelStatus, PrismaClient } from '@prisma/client';
+import { PanelStatus, PrismaClient } from '@prisma/client/edge';
 import type { Panel } from '~/typings/typings';
 import { getChatterPanelCreditsViaId, updateChatterCreditsViaId } from './chatterpanelcredits.server';
 

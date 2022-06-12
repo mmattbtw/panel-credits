@@ -1,5 +1,5 @@
-import type { Streamer } from '@prisma/client';
-import { PrismaClient } from '@prisma/client';
+import type { Streamer } from '@prisma/client/edge';
+import { PrismaClient } from '@prisma/client/edge';
 
 const prisma = new PrismaClient();
 
