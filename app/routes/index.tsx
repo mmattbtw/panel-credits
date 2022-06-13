@@ -16,7 +16,9 @@ export default function MyApp() {
     const session = useLoaderData() as sessionType;
     return (
         <Container>
-            <h1>hey {session?.json.display_name}</h1>
+            <h1>Panel Credits</h1>
+            <h2>Give your viewers 'credits', and allow them to submit a panel for your Twitch channel!</h2>
+            <h3>{session ? `logged in as: ${session?.json.display_name}` : ''}</h3>
 
             {!session ? (
                 <Button component={Link} to="/login" prefetch="intent">
