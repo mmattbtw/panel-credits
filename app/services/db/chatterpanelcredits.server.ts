@@ -1,5 +1,5 @@
-import type { ChatterPanelCredits } from '@prisma/client/edge';
-import { PrismaClient } from '@prisma/client/edge';
+import type { ChatterPanelCredits } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 

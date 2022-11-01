@@ -1,5 +1,5 @@
 import { Avatar, Button, Container, Group, Text } from '@mantine/core';
-import type { Streamer } from '@prisma/client/edge';
+import type { Streamer } from '@prisma/client';
 import type { LoaderFunction } from '@remix-run/node';
 import { Link, useLoaderData } from '@remix-run/react';
 import { authenticator } from '~/services/auth/auth.server';
